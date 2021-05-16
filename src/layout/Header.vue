@@ -1,17 +1,41 @@
 <template>
 	<nav>
 		<h1>Where in the world?</h1>
-		<div class="nav__dark">
-			<p><i class="uil uil-moon nav__icon"></i>Dark Mode</p>
-		</div>
+		<button class="myBtn" @click="toggleMode">
+			<div class="nav__dark" v-if="!dark">
+				<p><i class="uil uil-moon nav__icon"></i>Dark Mode</p>
+			</div>
+			<div class="nav__dark" v-else>
+				<p><i class="uil uil-sun nav__icon"></i>Light Mode</p>
+			</div>
+		</button>
 	</nav>
 </template>
 
 <script>
-export default {};
+export default {
+	data() {
+		return {
+			dark: false,
+		};
+	},
+	methods: {
+		toggleMode() {
+			if (!this.dark) {
+				this.dark = true;
+			} else {
+				this.dark = false;
+			}
+		},
+	},
+};
 </script>
 
 <style>
+.myBtn {
+	border: none;
+	background-color: transparent;
+}
 nav {
 	width: 100vw;
 	padding: 1rem 4rem;
@@ -33,5 +57,20 @@ nav {
 }
 .nav__icon {
 	margin-right: 0.5rem;
+}
+@media only screen and (max-width: 968px) {
+	nav {
+		padding: 1rem 2rem;
+	}
+}
+@media only screen and (max-width: 816px) {
+}
+@media only screen and (max-width: 517px) {
+	nav {
+		padding: 1rem 1rem;
+	}
+	.nav__dark:hover {
+		transform: translateX(-0.5rem);
+	}
 }
 </style>

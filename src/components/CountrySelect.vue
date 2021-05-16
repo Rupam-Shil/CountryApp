@@ -1,8 +1,8 @@
 <template>
-	<select>
-		<option value="0">Filter By Region</option>
-		<option v-for="country in countries" :key="country.latlng[0]">{{
-			country.region
+	<select @change="onChange()" v-model="selected" place>
+		<option value="" disabled selected>Filter By Regions..</option>
+		<option v-for="(region, i) in regions" :key="i" :value="region">{{
+			region
 		}}</option>
 	</select>
 </template>
@@ -10,15 +10,22 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			selected: '',
+		};
 	},
-	props: ['countries'],
+	props: ['regions'],
+	methods: {
+		onChange() {
+			this.$emit('changedRegion', this.selected);
+		},
+	},
 };
 </script>
 
 <style>
 select {
-	width: 10rem;
+	width: 12rem;
 	height: 2.5rem;
 	outline: none;
 	border: none;
@@ -27,6 +34,7 @@ select {
 	-moz-box-shadow: 0px 7px 7px 0px rgba(201, 201, 201, 0.75);
 	padding: 0 1rem;
 }
+
 option {
 	padding: 1rem;
 }
